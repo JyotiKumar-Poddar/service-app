@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
+import "./App.css";
+import Header from "./component/Header";
+import UserList from "./component/UserList"
+import UserInput from "./component/UserInput"
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="container-lg">
+        <Header />
+        <div className="row mx-lg-n5">
+          <UserInput />
+          <div className="col py4 px-lg-6 border bg-light">
+            <div className="card-body">
+              <UserList />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
