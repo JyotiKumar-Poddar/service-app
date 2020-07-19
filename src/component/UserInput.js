@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import * as apiService from '../api/serviceApi'
+import UserList from "./UserList"
 
 const UserInput = () => {
     const [name, setName] = useState("");
+    const [users, setUsers] = useState();
     function handleChange({ target }) {
         setName(target.value);
-
     }
     const empData = {
         id: Math.floor(Math.random() * Math.floor(100)),
@@ -19,7 +20,7 @@ const UserInput = () => {
         evt.preventDefault();
         console.log("calling api");
         empData.employee_name = name
-        apiService.saveEmployee(empData);
+        apiService.saveEmployee(empData).then(v => { setUsers(v.data) });
     }
     return <>
         <form onSubmit={handleSubmit}>
@@ -41,6 +42,7 @@ const UserInput = () => {
                 </div>
             </div>
         </form>
+        <UserList users={users} />
     </>
 
 }

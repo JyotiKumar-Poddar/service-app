@@ -15,11 +15,6 @@ function App() {
         <Header />
         <div className="row mx-lg-n5">
           <UserInput />
-          <div className="col py4 px-lg-6 border bg-light">
-            <div className="card-body">
-              <UserList />
-            </div>
-          </div>
         </div>
       </div>
     </>
