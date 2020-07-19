@@ -8,12 +8,12 @@ export function getEmployee() {
         .catch(handleError);
 }
 export function getEmployeeById(id) {
-    return fetch(baseUrl + "/employees" + id)
+    return fetch(baseUrl + "/employees/" + id)
         .then(handleResponse)
         .catch(handleError);
 }
 export function saveEmployee(employee) {
-    return fetch(baseUrl + "/create", {
+    return fetch(baseUrl + "/employees", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(employee),
@@ -23,7 +23,7 @@ export function saveEmployee(employee) {
 }
 
 export function deleteEmployee(id) {
-    return fetch(baseUrl + "/delete/" + id, { method: "DELETE" })
+    return fetch(baseUrl + "/employees/" + id, { method: "DELETE" })
         .then(handleResponse)
         .catch(handleError);
 }

@@ -7,13 +7,19 @@ const UserInput = () => {
         setName(target.value);
 
     }
-    const empData = '{"name":"test","salary":"12003","age":"23"}';
+    const empData = {
+        id: Math.floor(Math.random() * Math.floor(100)),
+        employee_name: '',
+        employee_salary: "1500",
+        employee_age: "34",
+        profile_image: ""
+    }
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
         console.log("calling api");
-        //alert(`Submitting Name ${name}`)
-        apiService.saveEmployee(empData).then(v => console.log("Date received ", v));
+        empData.employee_name = name
+        apiService.saveEmployee(empData);
     }
     return <>
         <form onSubmit={handleSubmit}>
