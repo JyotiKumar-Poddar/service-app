@@ -5,6 +5,11 @@ import UserList from "./UserList"
 const UserInput = () => {
     const [name, setName] = useState("");
     const [users, setUsers] = useState();
+
+    useEffect(() => {
+        apiService.getEmployee().then(_users => setUsers(_users.data));
+    }, []);
+
     function handleChange({ target }) {
         setName(target.value);
     }
@@ -19,8 +24,32 @@ const UserInput = () => {
     const handleSubmit = (evt) => {
         evt.preventDefault();
         empData.employee_name = name
-        apiService.saveEmployee(empData).then(v => { setUsers(v.data) });
+        apiService.saveEmployee(empData).then(v => {
+
+
+            //usersCopy.push(v.data);
+            setUsers(v.data);
+        });
     }
+
+    const handleDelete = (event) => {
+        apiService.deleteEmployee(event.target.value)
+            .then(v => apiService.getEmployee()
+                .then(_users => setUsers(_users.data)));
+        ;
+    };
+    function clearSearch() {
+        apiService.getEmployee().then(_users => setUsers(_users.data));
+    };
+
+
+    const handleSearch = (id) => {
+        console.log(id);
+        // event.preventDefault();
+        apiService.getEmployeeById(id).then(_users => setUsers(_users.data));
+
+    }
+
     return <>
         <form onSubmit={handleSubmit}>
             <div className="col py-3 px-lg-5 border bg-light align-items-center">
@@ -41,7 +70,8 @@ const UserInput = () => {
                 </div>
             </div>
         </form>
-        <UserList users={users} />
+        <UserList users={users} handleDelete={handleDelete}
+            clearSearch={clearSearch} handleSearch={handleSearch} />
     </>
 
 }
