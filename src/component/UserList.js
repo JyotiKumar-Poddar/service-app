@@ -6,11 +6,11 @@ import * as apiService from '../api/serviceApi'
 const UserList = props => {
     const [users, setUsers] = useState();
     const [user, setUser] = useState("");
-    console.log(props.users);
-
 
     useEffect(() => {
-        apiService.getEmployee().then(_users => setUsers(_users.data));
+        console.log("users ", users)
+        if (users == null)
+            apiService.getEmployee().then(_users => setUsers(_users.data));
     }, []);
     /*useEffect(() => {
             apiService.getEmployee().then(_users => setUsers(_users.data));
@@ -86,7 +86,10 @@ const UserList = props => {
                                 </tr>
                             );
                         })
-                            : ''}
+                            : <tr>
+                                <td align='center' colSpan='5'>No records</td>
+
+                            </tr>}
                     </tbody>
                 </table>
             </div>

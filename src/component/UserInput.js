@@ -18,7 +18,6 @@ const UserInput = () => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        console.log("calling api");
         empData.employee_name = name
         apiService.saveEmployee(empData).then(v => { setUsers(v.data) });
     }
